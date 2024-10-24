@@ -63,7 +63,7 @@ const printOrderSchema = new mongoose.Schema(
                 max: 100
             }
         },
-        status: {
+        PState: {
             type: String,
             enum: ['pending', 'printing', 'completed', 'failed'],
             default: 'pending'

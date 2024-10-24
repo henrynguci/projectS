@@ -21,7 +21,7 @@ const pageOrderSchema = new mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        status: {
+        Ostate: {
             type: String,
             enum: ['pending', 'completed', 'failed'],
             default: 'pending'
