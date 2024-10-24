@@ -1,0 +1,47 @@
+const mongoose = require('mongoose');
+
+const printerSchema = new mongoose.Schema(
+    {
+        printerID: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        brand: {
+            type: String,
+            required: true
+        },
+        model: {
+            type: String,
+            required: true
+        },
+        status: {
+            type: String,
+            enum: ['active', 'inactive', 'maintenance'],
+            default: 'active'
+        },
+        location: {
+            campus: {
+                type: String,
+                required: true
+            },
+            building: {
+                type: String,
+                required: true
+            },
+            room: {
+                type: String,
+                required: true
+            }
+        }
+    },
+    {
+        timestamps: true
+    }
+);
+
+module.exports = mongoose.model('Printer', printerSchema);
