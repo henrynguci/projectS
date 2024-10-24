@@ -20,19 +20,6 @@ const documentSchema = new mongoose.Schema(
             type: Number,
             required: true,
             min: 1
-        },
-        fileSize: {
-            type: Number,
-            required: true
-        },
-        uploadedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-        },
-        uploadDate: {
-            type: Date,
-            default: Date.now
         }
     },
     {

@@ -24,11 +24,6 @@ const notificationSchema = new mongoose.Schema(
             type: String,
             enum: ['unread', 'read'],
             default: 'unread'
-        },
-        type: {
-            type: String,
-            enum: ['system', 'print', 'page-order'],
-            required: true
         }
     },
     {

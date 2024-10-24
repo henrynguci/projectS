@@ -12,7 +12,7 @@ const pageOrderSchema = new mongoose.Schema(
             ref: 'User',
             required: true
         },
-        numberOfPages: {
+        numberOfA4Pages: {
             type: Number,
             required: true,
             min: 1

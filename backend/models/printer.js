@@ -19,7 +19,7 @@ const printerSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        status: {
+        state: {
             type: String,
             enum: ['active', 'inactive', 'maintenance'],
             default: 'active'

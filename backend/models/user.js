@@ -31,9 +31,9 @@ const userSchema = new mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        type: {
+        role: {
             type: String,
-            enum: ['student', 'staff'],
+            enum: ['client', 'SPSO'],
             required: true
         }
     },

@@ -56,17 +56,17 @@ const printOrderSchema = new mongoose.Schema(
                 required: true,
                 min: 1
             },
-            status: {
-                type: String,
-                enum: ['pending', 'printing', 'completed', 'failed'],
-                default: 'pending'
-            },
             scale: {
                 type: Number,
                 required: true,
                 min: 1,
                 max: 100
             }
+        },
+        status: {
+            type: String,
+            enum: ['pending', 'printing', 'completed', 'failed'],
+            default: 'pending'
         }
     },
     {
