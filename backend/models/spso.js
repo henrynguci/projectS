@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const spsoSchema = new mongoose.Schema(
     {
@@ -51,4 +51,4 @@ spsoSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-module.exports = mongoose.model('SPSO', spsoSchema);
+export default mongoose.model('SPSO', spsoSchema);
