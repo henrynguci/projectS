@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const pageOrderSchema = new mongoose.Schema(
     {
@@ -36,4 +36,4 @@ const pageOrderSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('PageOrder', pageOrderSchema);
+export default mongoose.model('PageOrder', pageOrderSchema);

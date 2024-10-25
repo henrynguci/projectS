@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const printerSchema = new mongoose.Schema(
     {
@@ -44,4 +44,4 @@ const printerSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Printer', printerSchema);
+export default mongoose.model('Printer', printerSchema);

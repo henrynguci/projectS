@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const printOrderSchema = new mongoose.Schema(
     {
@@ -74,4 +74,4 @@ const printOrderSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('PrintOrder', printOrderSchema);
+export default mongoose.model('PrintOrder', printOrderSchema);
