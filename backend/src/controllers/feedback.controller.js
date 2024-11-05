@@ -1,8 +1,8 @@
-import { query } from "express";
+
 import pool from "../config/db.js";
 import * as feedbackQueries from "../services/feedback.service.js";
 
-export const getAllFeedBack = (req, res) => {
+export const getAllFeedback = (req, res) => {
     pool.query(feedbackQueries.getAllFeedbacks, (error, results) => {
         if (results.rows.length === 0) {
             return res.send("There is no feedback in the db!!");

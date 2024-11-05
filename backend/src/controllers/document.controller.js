@@ -1,4 +1,4 @@
-import express from "express";
+
 import pool from "../config/db.js";
 import * as documentQueries from '../services/document.service.js';
 
