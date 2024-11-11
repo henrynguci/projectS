@@ -38,9 +38,9 @@ import * as spsoService from '../services/spso.service.js';
 export const signin = async (req, res) => {
     try {
         const formData = req.body;
-        const validUser = await authService.validUser(formData.username, formData.email, formData.password, formData.role);
+        const validUser = await authService.validUser(formData.email, formData.password, formData.role);
         if (validUser) {
-            const accessToken = await authService.accessToken(formData.username, formData.email, formData.role);
+            const accessToken = await authService.accessToken(formData.email, formData.role);
             return res.status(200).json({
                 message: 'Login successfully!',
                 data: {
@@ -56,6 +56,18 @@ export const signin = async (req, res) => {
             })
         }
     } catch (error) {
+        console.log(error);
         return res.status(500).json(error)
+    }
+}
+
+export const signout = async (req, res) => {
+    try {
+        const result = await authService.signout(req.headers.authorization?.split(' ')[1])
+        return res.status(200).json({
+            message: 'OK!'
+        })
+    } catch (error) {
+        return res.status(500)
     }
 }
