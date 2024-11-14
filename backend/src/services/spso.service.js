@@ -6,11 +6,11 @@ const salt = bcrypt.genSaltSync(10);
 export const createSpso = async ({username, password, full_name, phone_number, email}) => {
     try {
         const hashPassword = bcrypt.hashSync(password, salt);
-        const res = await query(
-            'insert into spsos (username, password, full_name, phone_number, email) values ($1, $2, $3, $4, $5)',
+        const result = await query(
+            'INSERT INTO spsos (username, password, full_name, phone_number, email) VALUES ($1, $2, $3, $4, $5)',
             [username, hashPassword, full_name, phone_number, email]
         );
-        return res;
+        return result;
     } catch (error) {
         throw error;
     }
@@ -19,7 +19,7 @@ export const createSpso = async ({username, password, full_name, phone_number, e
 export const findSpsoById = async (id) => {
     try {
         const spso = await query(
-            'select id, full_name, email, phone_number from spsos where id = $1',
+            'SELECT id, full_name, email, phone_number FROM spsos WHERE id = $1',
             [id]
         );
         return spso.rows[0];
@@ -31,7 +31,7 @@ export const findSpsoById = async (id) => {
 export const findSpsoByEmail = async (email) => {
     try {
         const spso = await query(
-            'select id, full_name, email, phone_number from spsos where email = $1',
+            'SELECT id, full_name, email, phone_number FROM spsos WHERE email = $1',
             [email]
         );
         return spso.rows[0];
@@ -43,11 +43,11 @@ export const findSpsoByEmail = async (email) => {
 export const updatePassSpso = async (id, password) => {
     try {
         const hashPassword = bcrypt.hashSync(password);
-        const res = await query(
-            'update spsos set password = $1 where id = $2',
+        const result = await query(
+            'UPDATE spsos SET password = $1 WHERE id = $2',
             [hashPassword, id]
         );
-        return res;
+        return result;
     } catch (error) {
         throw error;
     }
@@ -55,10 +55,10 @@ export const updatePassSpso = async (id, password) => {
 
 export const deleteSpso = async (id) => {
     try {
-        const res = await query(
-            'delete from spsos where id = $1', [id]
+        const result = await query(
+            'DELETE FROM spsos WHERE id = $1', [id]
         );
-        return res;
+        return result;
     } catch (error) {
         throw error;
     }

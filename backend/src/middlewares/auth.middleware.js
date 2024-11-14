@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
-import redis from '../config/redis.js';
 import * as spsoService from '../services/spso.service.js';
 import * as userService from '../services/user.service.js';
 
@@ -22,18 +21,23 @@ export const spsoPermission = async (req, res) => {
                 message: 'Not found!'
             })
         }
-        const redis_token = await redis.get(spso.email)
-        if(redis_token !== token) {
-            return res.status(404).json({
-                message: 'Not found!'
-            })
-        }
 
-        req.body.id = spso.id;
+        req.id = spso.id;
         next()
 
     } catch (error) {
-        return res.status(500)
+        if(error.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                message: "Token is expired!"
+            })
+        } else if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({
+                message: "Token is invalid!"
+            })
+        } else {
+            console.error(error);
+            return res.status(500);
+        }
     }
 }
 
@@ -47,18 +51,26 @@ export const userPermission = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
         const user = await userService.findUserByEmail(decoded.email);
         if (!user) {
-            return res.status(404)
-        }
-
-        const redis_token = redis.get(spso.email)
-        if(redis_token !== token) {
-            return res.status(404)
+            return res.status(404).json({
+                message: "Not found!"
+            })
         }
 
         req.id = user.id;
         next();
 
     } catch (error) {
-        return res.status(500)
+        if(error.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                message: "Token is expired!"
+            })
+        } else if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({
+                message: "Token is invalid!"
+            })
+        } else {
+            console.error(error);
+            return res.status(500);
+        }
     }
 }

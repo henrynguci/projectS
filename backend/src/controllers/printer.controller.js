@@ -29,3 +29,12 @@ export const changeState = async (req, res) => {
         return res.status(500);
     }
 }
+
+export const updateInfo = async (req, res) => {
+    try {
+        await printerService.updateInfo(req.body);
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
+}
