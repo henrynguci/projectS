@@ -1,61 +1,43 @@
 
-import pool from "../config/db.js";
-import * as documentQueries from '../services/document.service.js';
+import * as documentService from '../services/document.service.js';
 
-export const addDocument = (req, res) => {
-    const { name, file_type, number_pages } = req.body;
-    pool.query(documentQueries.addDocument,
-        [name, file_type, number_pages], (error, results) => {
-            if (error) throw error;
-            res.status(201).send('Add document successful!!!')
-        })
+export const addDocument = async (req, res) => {
+    try {
+        const dataForm = req.body;
+        await documentService.addDocument(dataForm);
+        return res.status(201).json();
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
 };
 
-export const getDocumentById = (req, res) => {
-    const id = parseInt(req.params.id);
-    pool.query(documentQueries.getDocumentById, [id], (error, results) => {
-        if (error) throw error;
-
-        if (results.rows.length === 0) {
-            return res.send("Document doesn't exist in the db");
-        }
-
-        res.status(200).json(results.rows);
-    })
+export const getDocumentById = async (req, res) => {
+    try {
+        const document = await documentService.getDocumentById(req.params.id);
+        return res.status(200).json(document);
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
 };
 
-export const getDocuments = (req, res) => {
-    pool.query(documentQueries.getDocuments, (error, results) => {
-        if (error) throw error;
-        res.status(200).json(results.rows);
-    })
+export const getDocuments = async (req, res) => {
+    try {
+        const documents = documentService.getDocuments();
+        return res.status(200).jso(documents);
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
 };
 
-export const deleteDocument = (req, res) => {
-    const id = parseInt(req.params.id);
-    pool.query(documentQueries.getDocumentById, [id], (error, results) => {
-        if (results.rows.length === 0) {
-            return res.send("Document doesn't exist in the db!!!")
-        }
-
-        pool.query(documentQueries.deleteDocument, [id], (error, results) => {
-            if (error) throw error;
-            res.status(200).send("Document removed successfully.");
-        })
-    })
-};
-
-export const updateDocument = (req, res) => {
-    const id = parseInt(req.params.id);
-    const { name, file_type, number_pages } = req.body;
-    pool.query(documentQueries.getDocumentById, [id], (error, results) => {
-        if (results.rows.length === 0) {
-            return res.send("Document doesn't exist in the db!!!")
-        }
-
-        pool.query(documentQueries.updateDocument, [name, file_type, number_pages, id], (error, results) => {
-            if (error) throw error;
-            res.status(200).send("Document updated successfully.");
-        })
-    })
+export const deleteDocument = async (req, res) => {
+    try {
+        await documentService.deleteDocument(req.params.id);
+        return res.status(200);
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
 };
