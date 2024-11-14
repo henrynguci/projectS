@@ -26,9 +26,15 @@ export const getPageOrderById = (req, res) => {
 };
 
 export const addPageOrder = (req, res) => {
-    const { number_A4pages } = req.body;
-    pool.query(pageOrderQueries.addPageOrder, [number_A4pages], (error, results) => {
+    const { number_A4pages, user_id } = req.body;
+    pool.query(pageOrderQueries.addPageOrder, [number_A4pages, user_id], (error, results) => {
         if (error) throw error;
+
+        // pool.query('UPDATE users SET number_A4pages = number_A4pages + $1 WHERE id = $2', [number_A4pages, user_id], (error, results) => {
+        //     if (error) throw error;
+        // });
+
+
         res.status(201).send('Add page order successfully!!');
     })
 };
