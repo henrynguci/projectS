@@ -1,4 +1,43 @@
-export const getPageOrderById = "SELECT * FROM page_orders p WHERE p.id = $1";
-export const getAllPageOrders = "SELECT * FROM page_orders";
-export const addPageOrder = "INSERT INTO page_orders (number_A4pages, user_id) VALUES ($1, $2)";
-export const deletePageOrder = "DELETE FROM page_orders WHERE id = $1";
+import { query } from "../config/db.js";
+
+
+export const addPageOrder = async ({ user_id, number_of_a4_pages, o_state, price }) => {
+    try {
+        const result = await query(
+            "INSERT INTO page_orders (user_id, number_of_a4_pages, o_state, price) VALUES ($1, $2, $3, $4)",
+            [user_id, number_of_a4_pages, o_state, price]
+        )
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getAllPageOrders = async () => {
+    try {
+        const result = await query("SELECT * FROM page_orders");
+        return result.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getPageOrderById = async (transaction_id) => {
+    try {
+        const result = await query("SELECT * FROM page_orders WHERE transaction_id = $1", [transaction_id]);
+        return result.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getPageOrderByUserid = async (user_id) => {
+    try {
+        const result = await query("SELECT * FROM page_orders WHERE user_id = $1", [user_id]);
+        return result.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
