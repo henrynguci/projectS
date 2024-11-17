@@ -23,7 +23,7 @@ export const getPrinters = async (req, res) => {
 
 export const changeState = async (req, res) => {
     try {
-        await printerService.changeState(req.body.id, req.body.status);
+        await printerService.changeState(req.param.id, req.body.status);
     } catch (error) {
         console.error(error);
         return res.status(500);
@@ -32,7 +32,7 @@ export const changeState = async (req, res) => {
 
 export const updateInfo = async (req, res) => {
     try {
-        await printerService.updateInfo(req.body);
+        await printerService.updateInfo(req.param.id, req.body);
     } catch (error) {
         console.error(error);
         return res.status(500);

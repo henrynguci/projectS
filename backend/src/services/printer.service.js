@@ -33,7 +33,7 @@ export const getPrinters = async () => {
     }
 }
 
-export const updateInfo = async ({id, brand, model, campus, room, building}) => {
+export const updateInfo = async (id, {brand, model, campus, room, building}) => {
     try {
         const result = await query(
             'UPDATE printers SET brand = $1, model = $2, campus = $3, room = $4, building = $5 WHERE printer_id = $6',

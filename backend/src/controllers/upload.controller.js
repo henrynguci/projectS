@@ -15,7 +15,7 @@ export const upload = async (req, res) => {
 
 export const remove = async (req, res) => {
     try {
-        const result = await uploadService.deleteFile(req.body.document_id, req.id)
+        const result = await uploadService.deleteFile(req.param.id, req.id)
         if(result) {
             return res.status(200).json({
                 message: "OK!",
