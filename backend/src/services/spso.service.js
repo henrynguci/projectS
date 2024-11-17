@@ -3,12 +3,12 @@ import bcrypt from 'bcryptjs';
 
 const salt = bcrypt.genSaltSync(10);
 
-export const createSpso = async ({username, password, full_name, phone_number, email}) => {
+export const createSpso = async ({username, password, full_name, phone_number, email, date_of_birth}) => {
     try {
         const hashPassword = bcrypt.hashSync(password, salt);
         const result = await query(
-            'INSERT INTO spsos (username, password, full_name, phone_number, email) VALUES ($1, $2, $3, $4, $5)',
-            [username, hashPassword, full_name, phone_number, email]
+            'INSERT INTO spsos (username, password, full_name, phone_number, email, date_of_birth) VALUES ($1, $2, $3, $4, $5, $6)',
+            [username, hashPassword, full_name, phone_number, email, date_of_birth]
         );
         return result;
     } catch (error) {

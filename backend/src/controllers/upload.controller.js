@@ -12,3 +12,21 @@ export const upload = async (req, res) => {
         return res.status(500);
     }
 }
+
+export const remove = async (req, res) => {
+    try {
+        const result = await uploadService.deleteFile(req.body.document_id, req.id)
+        if(result) {
+            return res.status(200).json({
+                message: "OK!",
+            });
+        } else {
+            return res.status(403).json({
+                message: "Forbidden!",
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500)
+    }
+}

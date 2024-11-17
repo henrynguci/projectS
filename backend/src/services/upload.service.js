@@ -70,12 +70,15 @@ export const uploadFile = async (file, user_id) => {
     }
 };
 
-export const deleteFile = async (document_id) => {
+export const deleteFile = async (document_id, user_id) => {
     try {
-        await query("DELETE FROM documents WHERE document_id = $1", [document_id])
+        const result = await query("DELETE FROM documents WHERE document_id = $1 AND user_id = $2", [document_id, user_id])
+        if(result.rowCount === 0)
+            return false
         await drive.files.delete({
             fileId: document_id,
         });
+        return true;
     } catch (error) {
         throw error;
     }
