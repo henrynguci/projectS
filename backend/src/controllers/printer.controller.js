@@ -11,10 +11,20 @@ export const addPrinter = async (req, res) => {
     } 
 }
 
-export const getPrinters = async (req, res) => {
+export const getAllPrinters = async (req, res) => {
     try {
-        const printers = await printerService.getPrinters()
+        const printers = await printerService.getAllPrinters()
         return res.status(200).json(printers);
+    } catch (error) {
+        console.error(error);
+        return res.status(500)
+    }
+}
+
+export const getPrinter = async (req, res) => {
+    try {
+        const printer = await printerService.getPrinter(req.param.id)
+        return res.status(200).json(printer);
     } catch (error) {
         console.error(error);
         return res.status(500)
@@ -23,7 +33,7 @@ export const getPrinters = async (req, res) => {
 
 export const changeState = async (req, res) => {
     try {
-        await printerService.changeState(req.param.id, req.body.status);
+        await printerService.changeState(req.param.id, req.body.state);
     } catch (error) {
         console.error(error);
         return res.status(500);
