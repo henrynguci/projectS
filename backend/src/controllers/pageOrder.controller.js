@@ -41,7 +41,19 @@ export const getPageOrderByUserid = async (req, res) => {
         console.error(error);
         return res.status(500);
     }
-}
+};
+
+export const changeState = async (req, res) => {
+    try {
+        const dataForm = req.body;
+        dataForm.id = parseInt(req.params.id);
+        await pageOrderService.changeState(dataForm);
+        return res.status(200).json({ message: 'update successfully!!!' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
+};
 
 
 

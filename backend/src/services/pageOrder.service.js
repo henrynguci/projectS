@@ -40,4 +40,13 @@ export const getPageOrderByUserid = async (user_id) => {
     }
 }
 
+export const changeState = async ({ id, o_state }) => {
+    try {
+        const result = await query("UPDATE page_orders SET o_state = $1 WHERE transaction_id = $2", [o_state, id]);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
