@@ -1,26 +1,30 @@
-.PHONY: db view_db down log clean_db dev rebuild
+.PHONY: dev down logs clean view-db clean-all restart ps
 
-db:
-	docker run -p5432:5432 --name dev_postgres -d \
-		-e POSTGRES_PASSWORD=postgres \
-		-e POSTGRES_USER=postgres \
-		-e POSTGRES_DB=postgres \
-		postgres:13
+up-dev:
+	docker compose --profile dev up -d --build
 
-view_db:
-	docker exec -it dev_postgres psql -U postgres -d postgres
+down-dev:
+	docker compose --profile dev down
 
-clean_db:
-	docker stop dev_postgres
-	docker rm -f dev_postgres
+logs:
+	docker compose --profile dev logs -f
 
-log:
-	docker logs -f dev_postgres
+clean:
+	docker compose --profile dev down -v
+	docker volume rm postgres_data || true
 
-down: clean_db
+view-db:
+	docker exec -it $$(docker ps -qf "name=db") psql -U postgres -d dev_spss
 
-dev:
-	@echo "Starting node server"
+clean-all: down
+	rm -rf node_modules
+
+restart:
+	docker compose --profile dev restart
+
+ps:
+	docker compose --profile dev ps
+
+dev: down-dev up-dev
+	@echo "Server is starting...";\
 	npm run dev
-
-rebuild: down dev

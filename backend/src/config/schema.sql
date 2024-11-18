@@ -93,7 +93,6 @@ CREATE TABLE users (
     full_name VARCHAR(255) NOT NULL,
     available_a4_pages INTEGER DEFAULT 0,
     last_modified TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    role VARCHAR(10) NOT NULL CHECK (role IN ('client', 'SPSO')),
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
