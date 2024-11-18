@@ -35,7 +35,7 @@ export const getPageOrderById = async (req, res) => {
 
 export const getPageOrderByUserid = async (req, res) => {
     try {
-        const pageOrders = await pageOrderService.getPageOrderByUserid(req.body.user_id);
+        const pageOrders = await pageOrderService.getPageOrderByUserid(req.query.user_id);
         return res.status(200).json(pageOrders);
     } catch (error) {
         console.error(error);
