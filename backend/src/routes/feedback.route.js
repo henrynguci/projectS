@@ -1,11 +1,11 @@
 import { Router } from "express";
 import * as feedbackController from "../controllers/feedback.controller.js"
 
-const router = Router();
+const route = Router();
 
 
-router.delete('/:id', feedbackController.deleteFeedback);
-router.get('/:id', feedbackController.getFeedbackById);
-router.post('/', feedbackController.addFeedback);
-router.get('/', feedbackController.getAllFeedback);
-export default router;
+route.delete('/:id', feedbackController.deleteFeedback);
+route.get('/:id', feedbackController.getFeedbackById);
+route.post('/', feedbackController.addFeedback);
+route.get('/', feedbackController.getAllFeedback);
+export default route;

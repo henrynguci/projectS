@@ -1,9 +1,9 @@
 import { Router } from "express";
 import * as pageOrderController from "../controllers/pageOrder.controller.js"
-const router = Router();
+const route = Router();
 
-router.get('/my', pageOrderController.getPageOrderByUserid);
-router.get('/:id', pageOrderController.getPageOrderById);
-router.post('/', pageOrderController.addPageOrder);
-router.get('/', pageOrderController.getAllPageOrders);
-export default router;
+route.get('/my', pageOrderController.getPageOrderByUserid);
+route.get('/:id', pageOrderController.getPageOrderById);
+route.post('/', pageOrderController.addPageOrder);
+route.get('/', pageOrderController.getAllPageOrders);
+export default route;

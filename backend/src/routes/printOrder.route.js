@@ -1,11 +1,11 @@
 import { Router } from "express";
 import * as printOrderController from "../controllers/printOrder.controller.js";
-const router = Router();
+const route = Router();
 
-router.get('/my', printOrderController.getPrintOrderByUserid)
-router.put('/:id', printOrderController.changeState);
-router.delete('/:id', printOrderController.deletePrintOrder);
-router.get('/:id', printOrderController.getPrintOrderById);
-router.post('/', printOrderController.addPrintOrder);
-router.get('/', printOrderController.getAllPrintOrders);
-export default router;
+route.get('/my', printOrderController.getPrintOrderByUserid)
+route.put('/:id', printOrderController.changeState);
+route.delete('/:id', printOrderController.deletePrintOrder);
+route.get('/:id', printOrderController.getPrintOrderById);
+route.post('/', printOrderController.addPrintOrder);
+route.get('/', printOrderController.getAllPrintOrders);
+export default route;
