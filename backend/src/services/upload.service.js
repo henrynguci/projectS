@@ -1,8 +1,7 @@
 import { google } from "googleapis";
 import { query } from "../config/db.js";
 import fs from "fs";
-import path from "path";
-// import pdf from 'pdf-parse';
+import { PDFDocument } from 'pdf-lib';
 import { config } from "dotenv";
 
 config();
@@ -49,11 +48,11 @@ export const uploadFile = async (file, user_id) => {
 
         //count num_pages
         let numPages = 1;
-        // if(file_type[file.mimeType] === 'pdf'){
-        //     const fileBuffer = fs.readFileSync(path.join(__dirname, `../${file.filename}`))
-        //     const data = await pdf(fileBuffer);
-        //     numPages = data.numpages
-        // }
+        if(file_type[file.mimetype] === 'pdf'){
+            const fileBuffer = fs.readFileSync(`./src/${file.filename}`)
+            const pdfDoc  = await PDFDocument.load(fileBuffer);
+            numPages = pdfDoc.getPageCount()
+        }
         
         //add file to db
         await query(
