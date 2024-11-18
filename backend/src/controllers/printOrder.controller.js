@@ -1,12 +1,11 @@
 
-import pool from "../config/db.js";
 import * as printOrderService from "../services/printOrder.service.js"
 
 export const addPrintOrder = async (req, res) => {
     try {
         const dataForm = req.body;
         await printOrderService.addPrintOrder(dataForm);
-        return res.status(201).json();
+        return res.status(201).json({ message: 'add print order successfully!' });
     } catch (error) {
         console.error(error);
         return res.status(500);
@@ -47,7 +46,7 @@ export const getPrintOrderByUserid = async (req, res) => {
 export const deletePrintOrder = async (req, res) => {
     try {
         await printOrderService.deletePrintOrder(req.params.id);
-        return res.status(200);
+        return res.status(200).json({ message: 'deleted successfully!!' });
     } catch (error) {
         console.error(error);
         return res.status(500);
@@ -59,7 +58,7 @@ export const changeState = async (req, res) => {
         let dataForm = req.body;
         dataForm.id = req.params.id;
         await printOrderService.changeState(dataForm);
-        return res.status(200);
+        return res.status(200).json({ message: "Update successfully!!" });
     } catch (error) {
         console.error(error);
         return res.status(500);

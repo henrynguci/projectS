@@ -2,11 +2,11 @@
 
 import { query } from "../config/db.js";
 
-export const addDocument = async ({ document_id, name, file_type, number_pages }) => {
+export const addDocument = async ({ document_id, name, file_type, number_of_pages }) => {
     try {
         const result = await query(
-            "INSERT INTO documents (document_id ,name, file_type, number_pages) VALUES ($1, $2, $3)",
-            [document_id, name, file_type, number_pages]
+            "INSERT INTO documents (document_id ,name, file_type, number_of_pages) VALUES ($1, $2, $3, $4)",
+            [document_id, name, file_type, number_of_pages]
         );
         return result;
 
@@ -35,7 +35,7 @@ export const getDocuments = async () => {
 
 export const deleteDocument = async (document_id) => {
     try {
-        const result = await query("DELETE FROM documents WHERE id = $1", [document_id]);
+        const result = await query("DELETE FROM documents WHERE document_id = $1", [document_id]);
         return result;
     } catch (error) {
         throw error;

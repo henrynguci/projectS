@@ -36,7 +36,7 @@ export const getFeedbackById = async (req, res) => {
 export const deleteFeedback = async (req, res) => {
     try {
         await feedbackService.deleteFeedback(req.params.id);
-        return res.status(200);
+        return res.status(200).json({ message: 'delete completed' });
     } catch (error) {
         console.error(error);
         return res.status(500);

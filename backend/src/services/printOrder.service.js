@@ -44,13 +44,14 @@ export const getPrintOrderByUserid = async (id) => {
 export const changeState = async ({ id, p_state }) => {
     try {
         if (p_state === 'completed') {
-            const get_current_time = await query("SELECT CURRENT_TIMESTAMP as end_at");
-            const end_at = get_current_time.rows[0].end_at;
-            const result = await query("UPDATE print_orders SET end_at = $1, p_state = $2 WHERE id = $3", [end_at, p_state, id]);
+            const get_current_time = await query("SELECT CURRENT_TIMESTAMP as end_time");
+            const end_time = get_current_time.rows[0].end_time;
+            const result = await query("UPDATE print_orders SET end_time = $1, p_state = $2 WHERE id = $3", [end_time, p_state, id]);
+            return result;
+        } else {
+            const result = await query("UPDATE print_orders SET p_state = $1 WHERE id = $2", [p_state, id]);
             return result;
         }
-        const result = await query("UPDATE print_orders SET p_state = $1 WHERE id = $2", [p_state, id]);
-        return result;
     } catch (error) {
         throw error;
     }

@@ -24,8 +24,8 @@ export const getDocumentById = async (req, res) => {
 
 export const getDocuments = async (req, res) => {
     try {
-        const documents = documentService.getDocuments();
-        return res.status(200).jso(documents);
+        const documents = await documentService.getDocuments();
+        return res.status(200).json(documents);
     } catch (error) {
         console.error(error);
         return res.status(500);
@@ -35,7 +35,7 @@ export const getDocuments = async (req, res) => {
 export const deleteDocument = async (req, res) => {
     try {
         await documentService.deleteDocument(req.params.id);
-        return res.status(200);
+        return res.status(200).json({ message: 'Delete completed' });
     } catch (error) {
         console.error(error);
         return res.status(500);
