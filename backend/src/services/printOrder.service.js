@@ -65,3 +65,25 @@ export const deletePrintOrder = async (id) => {
         throw error;
     }
 }
+
+export const filter = async ({ full_name = '', begin_at = undefined, end_at = undefined }) => {
+    try {
+        const get_current_time = await query("SELECT CURRENT_TIMESTAMP as end_time");
+        const end_time = get_current_time.rows[0].end_time;
+        end_at = end_at === undefined ? end_time : new Date(end_at);
+        begin_at = begin_at === undefined ? new Date(0) : new Date(begin_at);
+        if (full_name) {
+            const result = await query("select p.* from print_orders p inner join users u on p.user_id = u.id where u.full_name = $1 and p.start_time >= $2 and p.start_time <= $3 order by p.start_time",
+                [full_name, begin_at, end_at]
+            )
+            return result.rows;
+        } else {
+            const result = await query("select * from print_orders p where p.start_time >= $1 and p.start_time <= $2 order by p.start_time",
+                [begin_at, end_at]
+            )
+            return result.rows;
+        }
+    } catch (error) {
+        throw error;
+    }
+}

@@ -64,3 +64,14 @@ export const changeState = async (req, res) => {
         return res.status(500);
     }
 };
+
+export const filter = async (req, res) => {
+    try {
+        let dataForm = req.query;
+        const printOrders = await printOrderService.filter(dataForm);
+        return res.status(200).json(printOrders);
+    } catch (error) {
+        console.error(error);
+        return res.status(500);
+    }
+}
