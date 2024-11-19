@@ -3,6 +3,7 @@ import route from './src/routes/index.js';
 
 const app = express();
 
+import route from './src/routes/index.route.js';
 import { testConnection } from './src/config/db.js';
 const startServer = async () => {
     try {
@@ -18,5 +19,6 @@ const startServer = async () => {
         process.exit(1);
     }
 };
+
 
 startServer();
