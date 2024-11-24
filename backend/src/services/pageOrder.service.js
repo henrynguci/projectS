@@ -1,7 +1,7 @@
 import { query } from "../config/db.js";
 
 
-export const addPageOrder = async ({ user_id, number_of_a4_pages, o_state, price }) => {
+export const addPageOrder = async ( user_id, {number_of_a4_pages, o_state, price }) => {
     try {
         const result = await query(
             "INSERT INTO page_orders (user_id, number_of_a4_pages, o_state, price) VALUES ($1, $2, $3, $4)",

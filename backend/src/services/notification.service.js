@@ -36,7 +36,7 @@ export const deleteNotify = async (notification_id, user_id) => {
             'DELETE FROM notifications WHERE notify_id = $1 AND user_id = $2', 
             [notification_id, user_id]
         )
-        return result;
+        return result.rowCount !== 0;
     } catch (error) {
         throw error;
     }

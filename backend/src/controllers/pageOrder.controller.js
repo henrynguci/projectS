@@ -5,7 +5,7 @@ export const addPageOrder = async (req, res) => {
     try {
         req.body.price = req.body.number_of_a4_pages * 500;
         const dataForm = req.body
-        await pageOrderService.addPageOrder(dataForm);
+        await pageOrderService.addPageOrder(req.id, dataForm);
         return res.status(201).json();
     } catch (error) {
         console.error(error);
