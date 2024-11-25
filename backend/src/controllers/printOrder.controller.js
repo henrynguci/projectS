@@ -4,7 +4,7 @@ import * as printOrderService from "../services/printOrder.service.js"
 export const addPrintOrder = async (req, res) => {
     try {
         const dataForm = req.body;
-        await printOrderService.addPrintOrder(dataForm);
+        await printOrderService.addPrintOrder(req.id, dataForm);
         return res.status(201).json({ message: 'add print order successfully!' });
     } catch (error) {
         console.error(error);

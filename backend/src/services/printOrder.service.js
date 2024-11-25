@@ -2,7 +2,7 @@
 
 import { query } from "../config/db.js";
 
-export const addPrintOrder = async ({ user_id, document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale }) => {
+export const addPrintOrder = async (user_id, { document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale }) => {
     try {
         const result = await query(
             "INSERT INTO print_orders ( user_id, document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
