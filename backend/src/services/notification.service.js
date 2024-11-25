@@ -3,7 +3,7 @@ import { query } from "../config/db.js"
 
 export const getNotify = async (user_id) => {
     try {
-        const result = await query("SELECT * FROM notifications WHERE user_id = $1" [user_id])
+        const result = await query("SELECT * FROM notifications WHERE user_id = $1 ORDER BY created_at DESC LIMIT 5" [user_id])
         return result.rows;
     } catch (error) {
         throw error;

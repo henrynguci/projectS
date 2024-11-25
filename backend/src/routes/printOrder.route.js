@@ -4,7 +4,7 @@ import * as printOrderController from "../controllers/printOrder.controller.js";
 const route = Router();
 
 
-route.get('/get', authMiddleware.userPermission, printOrderController.getPrintOrderByUserid)
+route.get('/get', authMiddleware.userPermission, printOrderController.getPrintOrdersByUserid)
 route.get('/:id', printOrderController.getPrintOrderById);
 route.get('/', printOrderController.getAllPrintOrders);
 route.get('/filter', printOrderController.filter);
