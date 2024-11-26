@@ -1,5 +1,3 @@
-
-
 import { query } from "../config/db.js";
 
 export const addPrintOrder = async (user_id, { document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale }) => {
@@ -107,4 +105,15 @@ export const filter = async ({ full_name = '', begin_at = undefined, end_at = un
     } catch (error) {
         throw error;
     }
+}
+
+export const calcPages = (pageOfDocument, {sided, paper_size, pages_per_sheet, number_of_copies}) => {
+    let pageNeedToPrint = pageOfDocument;
+    if(sided === 'two-sided')
+        pageNeedToPrint /= 2;
+    if(paper_size === 'A3')
+        pageNeedToPrint *= 2;
+    pageNeedToPrint /= pages_per_sheet;
+    pageNeedToPrint *= number_of_copies;
+    return pageNeedToPrint;
 }

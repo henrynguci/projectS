@@ -47,7 +47,7 @@ export const getDocumentByUserId = async (user_id) => {
 export const getDocumentById = async (document_id) => {
     try {
         const result = await query("SELECT document_id, name, file_type, number_of_pages FROM documents WHERE document_id = $1", [document_id]);
-        return result.rows;
+        return result.rows[0];
     } catch (error) {
         throw error;
     }

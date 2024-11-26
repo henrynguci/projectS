@@ -40,6 +40,24 @@ export const findUserByEmail = async (email) => {
     }
 }
 
+export const descAvailabePage = async (user_id, num) => {
+    try {
+        const result = await query('UPDATE users SET available_a4_pages -= $1 WHERE user_id = $2', [num, user_id])
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const incrAvailabePage = async (user_id, num) => {
+    try {
+        const result = await query('UPDATE users SET available_a4_pages += $1 WHERE user_id = $2', [num, user_id])
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const updatePassUser = async (id, password) => {
     try {
         const hashPassword = bcrypt.hashSync(password);
