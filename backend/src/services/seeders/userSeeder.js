@@ -9,12 +9,13 @@ const seedUsers = async (count = 50) => {
     for (let i = 0; i < count; i++) {
       const userData = await createUser();
       await pool.query(`
-        INSERT INTO users (email, password, full_name, available_a4_pages, last_modified, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO users (email, password, full_name, date_of_birth, available_a4_pages, last_modified, created_at, updated_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       `, [
         userData.email,
         userData.password,
         userData.full_name,
+        userData.date_of_birth,
         userData.available_a4_pages,
         userData.last_modified,
         userData.created_at,
