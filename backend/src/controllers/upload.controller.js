@@ -1,4 +1,4 @@
-import * as uploadService from '../services/upload.service.js';
+import * as uploadService from '../services/spaces.service.js';
 
 export const upload = async (req, res) => {
     try {
