@@ -12,7 +12,9 @@ import { fileURLToPath } from 'url';
 const clearDatabase = async () => {
   try {
     console.log('🧹 Clearing existing data...');
-
+    await pool.query('DELETE FROM notifications');
+    await pool.query('DELETE FROM feedbacks');
+    await pool.query('DELETE FROM page_orders');
     await pool.query('DELETE FROM print_orders');
     await pool.query('DELETE FROM documents');
     await pool.query('DELETE FROM printers');
@@ -35,13 +37,15 @@ const seedAll = async () => {
     await seedPrinters(20);
     await seedDocuments(100);
     await seedPrintOrders(200);
+    await seedPageOrders(400);
+    await seedFeedbacks(100);
+    await seedNotifications(300);
     console.log('✅ Database seeding completed successfully!');
   } catch (error) {
     console.error('Fatal error during seeding:', error);
     throw error;
   }
 };
-
 
 
 const currentFile = fileURLToPath(import.meta.url);
