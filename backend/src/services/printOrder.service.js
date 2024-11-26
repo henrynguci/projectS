@@ -38,11 +38,20 @@ export const getPrintOrderById = async (id) => {
     }
 }
 
-export const getPrintOrdersByUserid = async (id, page = 1) => {
+export const getPrintOrdersByUserid = async (id, page = 1, status) => {
     try {
         const limit = 10;
         const offset = (Number(page) - 1) * limit;
-        const result = await query("SELECT * FROM print_orders WHERE user_id = $1 ORDER BY created_at DESC LIMIT 10 OFFSET $2", [id, offset]);
+        const result = await query(
+            `SELECT d.name, po.start_time, po.number_of_copies, p.campus, p.building, p.room, d.number_of_pages, po.state
+            FROM print_orders po
+            JOIN documents d ON po.document_id = d.document_id
+            JOIN printer p ON po.printer_id = p.printer_id
+            WHERE po.user_id = $1 ${status ? 'AND po.state = $2' : ''}
+            ORDER BY created_at DESC 
+            LIMIT 10 OFFSET $3`, 
+            [id, status, offset]
+        );
         return result.rows;
     } catch (error) {
         throw error;

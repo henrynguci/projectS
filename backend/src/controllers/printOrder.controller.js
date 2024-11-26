@@ -45,7 +45,7 @@ export const getPrintOrderById = async (req, res) => {
 
 export const getPrintOrdersByUserid = async (req, res) => {
     try {
-        const printOrders = await printOrderService.getPrintOrdersByUserid(req.id, req.query.page);
+        const printOrders = await printOrderService.getPrintOrdersByUserid(req.id, req.query.page, req.query.status);
         return res.status(200).json(printOrders);
     } catch (error) {
         console.error(error);
