@@ -3,12 +3,12 @@ import bcrypt from 'bcryptjs';
 
 const salt = bcrypt.genSaltSync(10);
 
-export const createUser = async ({full_name, email, password, available_a4_pages}) => {
+export const createUser = async ({full_name, email, password, date_of_birth, available_a4_pages}) => {
     try {
         const hashPassword = bcrypt.hashSync(password, salt);
         const result = await query(
-            'INSERT INTO users (full_name, email, password, available_a4_pages) VALUES ($1, $2, $3, $4)',
-            [full_name, email, hashPassword, available_a4_pages]
+            'INSERT INTO users (full_name, email, password, date_of_birth, available_a4_pages) VALUES ($1, $2, $3, $4, $5)',
+            [full_name, email, hashPassword, date_of_birth, available_a4_pages]
         );
         return result;
     } catch (error) {

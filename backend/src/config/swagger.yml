@@ -41,6 +41,9 @@ paths:
                 password:
                   type: string
                   example: "123456"
+                date_of_birth:
+                  type: string
+                  example: "2004-01-01"
                 available_a4_pages:
                   type: integer
                   example: 10
@@ -119,7 +122,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/notification/get:
+  /api/notification:
     get:
       tags:
         - Notification
@@ -131,7 +134,31 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/notification/view/{id}:
+    put:
+      tags:
+        - Notification
+      summary: Action view all
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Notification
+      summary: Delete all
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}        
+  /api/notification/{id}:
     put:
       tags:
         - Notification
@@ -152,21 +179,6 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/notification/view-all:
-    put:
-      tags:
-        - Notification
-      summary: Action view all
-      requestBody:
-        content: {}
-      security:
-        - bearerAuth: []
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-  /api/notification/delete/{id}:
     delete:
       tags:
         - Notification
@@ -185,19 +197,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/notification/delete-all:
-    delete:
-      tags:
-        - Notification
-      summary: Delete all
-      security:
-        - bearerAuth: []
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-  /api/printer/get-all:
+  /api/printer:
     get:
       tags:
         - Printer
@@ -207,24 +207,6 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/printer/get/{id}:
-    get:
-      tags:
-        - Printer
-      summary: Get info detail
-      parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-          required: true
-          example: "1"
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-  /api/printer/add:
     post:
       tags:
         - Printer
@@ -254,6 +236,23 @@ paths:
                   example: "106"
       security:
         - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/printer/{id}:
+    get:
+      tags:
+        - Printer
+      summary: Get info detail
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: "1"
       responses:
         "200":
           description: Successful response
@@ -393,7 +392,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/page-orders/get-all:
+  /api/page-order/get-all:
     get:
       tags:
         - Page Order
@@ -411,7 +410,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/page-orders/{id}:
+  /api/page-order/{id}:
     get:
       tags:
         - Page Order
@@ -452,7 +451,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/page-orders:
+  /api/page-order:
     get:
       tags:
         - Page Order
@@ -495,7 +494,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/print-orders/get-all:
+  /api/print-order/get-all:
     get:
       tags:
         - Printer Order
@@ -511,7 +510,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/print-orders:
+  /api/print-order:
     post:
       tags:
         - Printer Order
@@ -556,7 +555,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/print-orders/{id}:
+  /api/print-order/{id}:
     get:
       tags:
         - Printer Order
@@ -613,7 +612,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/print-orders/filter:
+  /api/print-order/filter:
     get:
       tags:
         - Printer Order
