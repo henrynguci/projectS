@@ -55,7 +55,7 @@ export const getDocumentById = async (document_id) => {
 
 export const deleteDocument = async (document_id, user_id) => {
     try {
-        const result = await query("DELETE FROM documents WHERE document_id = $1 AND user_id", [document_id, user_id]);
+        const result = await query("DELETE FROM documents WHERE document_id = $1 AND user_id = $2", [document_id, user_id]);
         if (result.rowCount !== 0) {
             await drive.remove(document_id);
         }
