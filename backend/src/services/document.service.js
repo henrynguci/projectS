@@ -25,7 +25,7 @@ export const addDocument = async (file, user_id) => {
     } catch (error) {
         throw error;
     } finally {
-        // await fs.promises.unlink(`./src/${file.filename}`);
+        await fs.promises.unlink(`./src/${file.filename}`);
     }
 };
 
