@@ -25,7 +25,7 @@ export const addDocument = async (file, user_id) => {
     } catch (error) {
         throw error;
     } finally {
-        await fs.promises.unlink(`./src/${file.filename}`);
+        // await fs.promises.unlink(`./src/${file.filename}`);
     }
 };
 
@@ -33,7 +33,7 @@ export const getDocumentByUserId = async (user_id) => {
     try {
         const result = await query("SELECT document_id, name, file_type, number_of_pages FROM documents WHERE user_id = $1", [user_id]);
         const documents = result.rows;
-        for (doc in documents) {
+        for (const doc of documents) {
             const url = await drive.getUrl(doc.document_id);
             doc.webViewLink = url.webViewLink;
             doc.webContentLink = url.webContentLink;
