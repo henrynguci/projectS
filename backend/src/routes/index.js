@@ -18,5 +18,7 @@ route.use('/document', documentRoute);
 route.use('/feedback', feedbackRoute);
 route.use('/page-order', pageOrderRoute);
 route.use('/print-order', printOrderRouter);
+route.use('/user', userRoute);
+route.use('/spso', spsoRoute);
 
 export default route;
