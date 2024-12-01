@@ -7,14 +7,14 @@ import multer from '../middlewares/multer.middleware.js';
 const route = Router();
 
 route.post('/',
-    authMiddleware.userPermission,
-    multer.single('file'),
-    upload
+  authMiddleware.userPermission,
+  multer.single('file'),
+  upload
 );
 
-route.delete('/:id',
-    authMiddleware.userPermission,
-    remove  
+route.delete('/:document_id',
+  authMiddleware.userPermission,
+  remove
 );
 
 export default route;

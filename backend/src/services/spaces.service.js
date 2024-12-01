@@ -39,8 +39,7 @@ const file_type = JSON.parse(fs.readFileSync('./src/config/file_type.json', 'utf
 const generateUniqueFileName = (originalName) => {
   const timestamp = Date.now();
   const randomString = Math.random().toString(36).substring(2, 15);
-  const extension = originalName.split('.').pop();
-  return `${timestamp}-${randomString}.${extension}`;
+  return `${timestamp}-${randomString}`;
 };
 
 /**
@@ -169,19 +168,18 @@ export const uploadFile = async (file, user_id) => {
 /**
  * Delete file from Spaces
  * @param {string} document_id - Document ID
- * @param {string} user_id - User ID
  * @returns {Promise<boolean>} Delete result
  */
-export const deleteFile = async (document_id, user_id) => {
+export const deleteFile = async (document_id) => {
   try {
-    // Check if user owns the file
+    // Check if file exists
     const fileCheck = await query(
-      "SELECT * FROM documents WHERE document_id = $1 AND user_id = $2",
-      [document_id, user_id]
+      "SELECT * FROM documents WHERE document_id = $1",
+      [document_id]
     );
 
     if (fileCheck.rowCount === 0) {
-      throw new Error('File not found or unauthorized');
+      throw new Error('File not found');
     }
 
     // Delete from Spaces
@@ -192,7 +190,7 @@ export const deleteFile = async (document_id, user_id) => {
 
     await s3Client.send(new DeleteObjectCommand(deleteParams));
 
-    // Update database
+    // Delete from database
     await query(
       "DELETE FROM documents WHERE document_id = $1",
       [document_id]
@@ -204,6 +202,7 @@ export const deleteFile = async (document_id, user_id) => {
     throw error;
   }
 };
+
 
 /**
  * Get signed URL for file download
