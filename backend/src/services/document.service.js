@@ -34,9 +34,14 @@ export const getDocumentByUserId = async (user_id) => {
         const result = await query("SELECT document_id, name, file_type, number_of_pages FROM documents WHERE user_id = $1", [user_id]);
         const documents = result.rows;
         for (const doc of documents) {
-            const url = await drive.getUrl(doc.document_id);
-            doc.webViewLink = url.webViewLink;
-            doc.webContentLink = url.webContentLink;
+            try {
+                const url = await drive.getUrl(doc.document_id);
+                doc.webViewLink = url.webViewLink;
+                doc.webContentLink = url.webContentLink;
+            } catch (err) {
+                doc.webViewLink = null;
+                doc.webContentLink = null;
+            }
         }
         return documents
     } catch (error) {

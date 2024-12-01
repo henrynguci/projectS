@@ -9,6 +9,7 @@ import pageOrderRoute from "./pageOrder.route.js";
 import printOrderRouter from "./printOrder.route.js";
 import userRoute from './user.route.js'
 import spsoRoute from './spso.route.js'
+import reportRoute from './report.route.js';
 
 const route = Router();
 
@@ -22,5 +23,6 @@ route.use('/page-order', pageOrderRoute);
 route.use('/print-order', printOrderRouter);
 route.use('/user', userRoute);
 route.use('/spso', spsoRoute);
+route.use('/report', reportRoute)
 
 export default route;

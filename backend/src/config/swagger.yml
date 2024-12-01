@@ -18,6 +18,7 @@ tags:
   - name: Printer Order
   - name: User
   - name: SPSO
+  - name: Report
 paths:
   /api/auth/signup/user:
     post:
@@ -368,7 +369,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true
           example: "1"
       responses:
@@ -380,11 +381,13 @@ paths:
       tags:
         - Document
       summary: delete
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true
           example: "1"
       responses:
@@ -655,6 +658,24 @@ paths:
       tags:
         - SPSO
       summary: get info
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/report/month:
+    get:
+      tags:
+        - Report
+      summary: get num order in month
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+          example: "2024"
       security:
         - bearerAuth: []
       responses:

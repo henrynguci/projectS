@@ -42,7 +42,7 @@ export const findUserByEmail = async (email) => {
 
 export const descAvailabePage = async (user_id, num) => {
     try {
-        const result = await query('UPDATE users SET available_a4_pages -= $1 WHERE user_id = $2', [num, user_id])
+        const result = await query('UPDATE users SET available_a4_pages = available_a4_pages - $1 WHERE id = $2', [num, user_id])
         return result;
     } catch (error) {
         throw error;
@@ -51,7 +51,7 @@ export const descAvailabePage = async (user_id, num) => {
 
 export const incrAvailabePage = async (user_id, num) => {
     try {
-        const result = await query('UPDATE users SET available_a4_pages += $1 WHERE user_id = $2', [num, user_id])
+        const result = await query('UPDATE users SET available_a4_pages = available_a4_pages + $1 WHERE id = $2', [num, user_id])
         return result;
     } catch (error) {
         throw error;
@@ -62,7 +62,7 @@ export const updatePassUser = async (id, password) => {
     try {
         const hashPassword = bcrypt.hashSync(password);
         const result = await query(
-            'UPDATE users SET password = $1 WHERE user_id = $2',
+            'UPDATE users SET password = $1 WHERE id = $2',
             [hashPassword, id]
         );
         return result;
@@ -74,7 +74,7 @@ export const updatePassUser = async (id, password) => {
 export const deleteUser = async (id) => {
     try {
         const result = await query(
-            'DELETE FROM users WHERE user_id = $1', [id]
+            'DELETE FROM users WHERE id = $1', [id]
         );
         return result;
     } catch (error) {
