@@ -5,6 +5,7 @@ CREATE TABLE documents (
   name VARCHAR(255) NOT NULL,
   file_type VARCHAR(10) NOT NULL CHECK (file_type IN ('pdf', 'doc', 'docx')),
   number_of_pages INTEGER NOT NULL CHECK (number_of_pages >= 1),
+  user_id INT NOT NULL,
   created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
@@ -122,3 +123,5 @@ ALTER TABLE print_orders ADD CONSTRAINT fk_user_print_order FOREIGN KEY (user_id
 ALTER TABLE print_orders ADD CONSTRAINT fk_document_print_order FOREIGN KEY (document_id) REFERENCES documents (id);
 
 ALTER TABLE print_orders ADD CONSTRAINT fk_printer_print_order FOREIGN KEY (printer_id) REFERENCES printers (printer_id);
+
+ALTER TABLE documents ADD CONSTRAINT fk_user_document FOREIGN KEY (user_id) REFERENCES users (id);

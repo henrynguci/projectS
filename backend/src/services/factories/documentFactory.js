@@ -103,7 +103,7 @@ const SEMESTERS = [
   'HK2-2024-2025'
 ];
 
-const createDocument = () => {
+const createDocument = (userId) => {
   const documentType = faker.helpers.arrayElement(DOCUMENT_TYPES);
   const subject = faker.helpers.arrayElement(SUBJECTS);
   const semester = faker.helpers.arrayElement(SEMESTERS);
@@ -114,6 +114,7 @@ const createDocument = () => {
     name,
     file_type: faker.helpers.arrayElement(FILE_TYPES),
     number_of_pages: faker.number.int({ min: 1, max: 100 }),
+    user_id: userId,
     created_at: faker.date.past(),
     updated_at: faker.date.recent()
   };
