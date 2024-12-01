@@ -19,7 +19,7 @@ export const cleanupOldFiles = async () => {
         for (const file of oldFiles.rows) {
             // Xóa từ Spaces
             const deleteParams = {
-                Bucket: process.env.SPACE_NAME,
+                Bucket: process.env.SPACES_NAME,
                 Key: file.document_id
             };
             await s3Client.send(new DeleteObjectCommand(deleteParams));
