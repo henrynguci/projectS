@@ -8,7 +8,7 @@ import feedbackRoute from "./feedback.route.js";
 import pageOrderRoute from "./pageOrder.route.js";
 import printOrderRouter from "./printOrder.route.js";
 import userRoute from './user.route.js'
-import spsoRoute from './notification.route.js'
+import spsoRoute from './spso.route.js'
 
 const route = Router();
 
