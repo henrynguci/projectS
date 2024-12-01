@@ -16,7 +16,7 @@ export const changeState = async (id, state) => {
     try {
         const result = await query(
             'UPDATE printers SET state = $1 WHERE printer_id = $2', 
-            [id, state]
+            [state, id]
         );
         return result;
     } catch (error) {
