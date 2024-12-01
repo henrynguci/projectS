@@ -15,7 +15,7 @@ export const addPrinter = async ({name, brand, model, campus, room, building}) =
 export const changeState = async (id, state) => {
     try {
         const result = await query(
-            'UPDATE printers SET state = $1 WHERE id = $2', 
+            'UPDATE printers SET state = $1 WHERE printer_id = $2', 
             [id, state]
         );
         return result;
