@@ -1,9 +1,9 @@
 import { query } from "../config/db.js";
 
-export const addPrintOrder = async (user_id, { document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale }) => {
+export const addPrintOrder = async (user_id, document_id, { printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale }) => {
     try {
         const result = await query(
-            "INSERT INTO print_orders ( user_id, document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+            "INSERT INTO print_orders (user_id, document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
             [user_id, document_id, printer_id, sided, paper_size, paper_orientation, pages_per_sheet, number_of_copies, p_state, scale]
         );
         return result;
@@ -45,7 +45,7 @@ export const getPrintOrdersByUserid = async (id, page = 1, status) => {
         const result = await query(
             `SELECT d.name, po.start_time, po.number_of_copies, p.campus, p.building, p.room, d.number_of_pages, po.state
             FROM print_orders po
-            JOIN documents d ON po.document_id = d.document_id
+            JOIN documents d ON po.document_id = d.id
             JOIN printer p ON po.printer_id = p.printer_id
             WHERE po.user_id = $1 ${status ? 'AND po.state = $2' : ''}
             ORDER BY created_at DESC 

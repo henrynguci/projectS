@@ -14,7 +14,7 @@ export const addPrintOrder = async (req, res) => {
             return res.status(400).json({message: 'User do not have enough pages to print!'})
         }
 
-        await printOrderService.addPrintOrder(req.id, dataForm);
+        await printOrderService.addPrintOrder(req.id, document.id, dataForm);
         await userService.descAvailabePage(req.id, pageNeedToPrint);
         return res.status(201).json({ message: 'Add print order successfully!' });
     } catch (error) {

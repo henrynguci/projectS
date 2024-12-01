@@ -31,7 +31,7 @@ export const addDocument = async (file, user_id) => {
 
 export const getDocumentByUserId = async (user_id) => {
     try {
-        const result = await query("SELECT document_id, name, file_type, number_of_pages FROM documents WHERE user_id = $1", [user_id]);
+        const result = await query("SELECT id, document_id, name, file_type, number_of_pages FROM documents WHERE user_id = $1", [user_id]);
         const documents = result.rows;
         for (const doc of documents) {
             try {
@@ -51,7 +51,7 @@ export const getDocumentByUserId = async (user_id) => {
 
 export const getDocumentById = async (document_id) => {
     try {
-        const result = await query("SELECT document_id, name, file_type, number_of_pages FROM documents WHERE document_id = $1", [document_id]);
+        const result = await query("SELECT id, document_id, name, file_type, number_of_pages FROM documents WHERE document_id = $1", [document_id]);
         return result.rows[0];
     } catch (error) {
         throw error;
