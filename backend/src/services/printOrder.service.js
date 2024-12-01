@@ -28,7 +28,7 @@ export const getPrintOrderById = async (id) => {
         const result = await query(
             `SELECT * 
             FROM print_orders 
-            JOIN documents ON print_orders.document_id = documents.document_id
+            JOIN documents ON print_orders.document_id = documents.id
             WHERE print_orders.id = $1`, 
             [id]
         );

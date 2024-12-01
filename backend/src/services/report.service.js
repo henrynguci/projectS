@@ -1,6 +1,6 @@
 import { query } from "../config/db.js";
 
-export const countOrderInYear = async (year) => {
+export const countOrderInMonth = async (year) => {
     try {
         if (!year) {
             const now = new Date();
