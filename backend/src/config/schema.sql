@@ -50,7 +50,7 @@ CREATE TABLE page_orders (
 );
 
 -- Create Printers table
-CREATE TABLE printers (
+  CREATE TABLE printers (
   printer_id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   brand VARCHAR(255) NOT NULL,
