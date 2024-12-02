@@ -18,7 +18,6 @@ export const changeState = async (id, state) => {
             'UPDATE printers SET state = $1 WHERE printer_id = $2', 
             [state, id]
         );
-        console.log(result);
         return result.rowCount !== 0;
     } catch (error) {
         throw error;
