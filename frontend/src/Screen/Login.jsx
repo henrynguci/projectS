@@ -152,6 +152,7 @@ import { useState } from "react";
 import imgbg from "../assets/bg-login.jpg";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import { showFail } from "../Components/User/Alert/Aleart";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -191,7 +192,7 @@ export default function Login() {
       })
       .catch((error) => {
         console.log(error.response.data.message);
-        // alert("An error occurred. Please try again.");
+        showFail("An error occurred. Please try again.");
       });
   };
   console.log(role, isLoggedIn);
