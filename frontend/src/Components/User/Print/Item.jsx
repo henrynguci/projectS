@@ -141,7 +141,7 @@ export default function Item(props) {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/print-order", // API endpoint
+        "http://128.199.197.144/api/print-order", // API endpoint
         formData, // Data to be sent with the POST request
         {
           headers: {
@@ -182,7 +182,7 @@ export default function Item(props) {
 
     try {
       const response = await axios.get(
-        `http://127.0.0.1:5000/api/file/${props.item.document_id}/url`,
+        `http://128.199.197.144/api/file/${props.item.document_id}/url`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Set Authorization header

@@ -57,7 +57,7 @@ export default function Printer() {
     }
 
     try {
-      const response = await axios.get("http://127.0.0.1:5000/api/document", {
+      const response = await axios.get("http://128.199.197.144/api/document", {
         headers: {
           Authorization: `Bearer ${token}`, // Set Authorization header
         },
@@ -87,7 +87,7 @@ export default function Printer() {
 
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:5000/api/file/${id}`,
+        `http://128.199.197.144/api/file/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include Bearer token in Authorization header
@@ -149,7 +149,7 @@ export default function Printer() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/file", // URL API
+        "http://128.199.197.144/api/file", // URL API
         formData, // Dữ liệu FormData
         {
           headers: {

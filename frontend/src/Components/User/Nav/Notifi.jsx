@@ -42,7 +42,7 @@ export default function Notifi() {
       try {
         // Make the GET request with the Bearer token in the Authorization header
         const response = await axios.get(
-          "http://127.0.0.1:5000/api/print-order",
+          "http://128.199.197.144/api/print-order",
           {
             params: {
               status: "completed",
