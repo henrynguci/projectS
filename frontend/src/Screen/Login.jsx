@@ -28,7 +28,7 @@
 //   //   const autoSignup = async () => {
 //   //     try {
 
-//   //       const res = await axios.post("http://localhost:5000/api/auth/signup", formsup);
+//   //       const res = await axios.post("http://128.199.197.144/api/auth/signup", formsup);
 //   //       console.log(res);
 //   //       if (res.status === 201) {
 //   //         console.log("Sign-up successful:", res.data);
@@ -46,7 +46,7 @@
 
 //     try
 //     {
-//       const res = await axios.post("http://localhost:5000/api/auth/signin",formData);
+//       const res = await axios.post("http://128.199.197.144/api/auth/signin",formData);
 //       console.log(res);
 //       if(res.status === 200)
 //       {

@@ -24,7 +24,7 @@ const Printer = () => {
   }, []);
   const fetchPrinter = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/printer");
+      const response = await axios.get("http://128.199.197.144/api/printer");
       setPrinters(response.data);
       console.log(response);
     } catch (error) {
@@ -40,7 +40,7 @@ const Printer = () => {
         return;
       }
       const response = await axios.post(
-        "http://localhost:5000/api/printer",
+        "http://128.199.197.144/api/printer",
         newprinter,
         {
           headers: {
@@ -111,7 +111,7 @@ const Printer = () => {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/printer/change-state/${printer_id}`,
+        `http://128.199.197.144/api/printer/change-state/${printer_id}`,
         { state: newState },
         {
           headers: {
@@ -144,7 +144,7 @@ const Printer = () => {
         return;
       }
       const response = await axios.put(
-        `http://localhost:5000/api/printer/update/${id}`,
+        `http://128.199.197.144/api/printer/update/${id}`,
         updatedPrinter,
         {
           headers: {

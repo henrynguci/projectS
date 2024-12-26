@@ -28,7 +28,7 @@ const Config = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.put(
-        "http://localhost:5000/api/spso/allocate-pages",
+        "http://128.199.197.144/api/spso/allocate-pages",
         newEntry,
         {
           headers: {

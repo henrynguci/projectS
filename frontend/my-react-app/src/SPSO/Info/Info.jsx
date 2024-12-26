@@ -11,7 +11,7 @@ const Info = () => {
     const fetchData = async () => {
       try {
         const accessToken = localStorage.getItem("accessToken");
-        const response = await axios.get("http://localhost:5000/api/spso", {
+        const response = await axios.get("http://128.199.197.144/api/spso", {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
 

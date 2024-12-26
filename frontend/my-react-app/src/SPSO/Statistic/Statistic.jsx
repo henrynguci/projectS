@@ -73,7 +73,7 @@ const Statistic = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await axios.get(
-        "http://localhost:5000/api/report/month",
+        "http://128.199.197.144/api/report/month",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
